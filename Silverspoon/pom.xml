@@ -6,8 +6,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <modules>
-        <module>../CamelWeb</module>
-        <module>../CamelRoutes</module>
+        <module>../SilverspoonCamelRoutes</module>
+        <module>../SilverspoonCamelWeb</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
