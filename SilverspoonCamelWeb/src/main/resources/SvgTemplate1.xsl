@@ -10,12 +10,12 @@
     <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />        
     
     <!-- Start positions -->
-    <xsl:variable name="startX" select="300" />
-    <xsl:variable name="startY" select="250" />
+    <xsl:variable name="startX" select="125" />
+    <xsl:variable name="startY" select="167" />
     
     <!-- Max x position -->
     <xsl:variable name="maxX" select="400" />
-    
+     
     <xsl:template match="/">
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xLink">
 
@@ -24,30 +24,76 @@
 
             <!-- BLACK SMALL BOARD -->
             <rect x = "100" y = "150" width = "525" height = "250" fill = "#282828"/>
-
+           
             <!-- Route FROM -->
             <xsl:if test="//camel:camelContext/camel:route/camel:from">
                 <xsl:analyze-string select="//camel:camelContext/camel:route/camel:from/@uri" regex="^[^:]+">
                     <xsl:matching-substring>
-                        <rect x="125" y="{$startY}" width="125" height="50" fill="#CCFFFF" />
-                        <text x="152" y="{$startY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;"><xsl:value-of select="."/></text>
+                        <rect x="{$startX}" y="{$startY}" width="125" height="50" fill="#CCFFFF" />
+                        <text x="{$startX+25}" y="{$startY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
+                            <xsl:value-of select="."/>
+                        </text>
                     </xsl:matching-substring>                
                 </xsl:analyze-string>
             </xsl:if>
             
             <!-- Route TO -->
             <xsl:for-each select="//camel:camelContext/camel:route/camel:to">
-                <xsl:variable name="i" select="position()-1" />
-                <xsl:variable name="posX" select="($i*175)+$startX" />
-                <xsl:variable name="posY" select="$startY" />
+                <xsl:variable name="i" select="position()" />
+                <xsl:variable name="row" select="(($i div 3)-(($i mod 3) div 3))"/>
+                <xsl:variable name="column" select="$i mod 3"/>
                 
-                <xsl:analyze-string select="./@uri" regex="^[^:]+">
-                    <xsl:matching-substring>
-                        <polyline points="{($posX)-50},{($posY)+25} {($posX)-14},{($posY)+25}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />
-                        <rect x="{$posX}" y="{$posY}" width="125" height="50" fill="#CCFFFF" />                
-                        <text x="{$posX+25}" y="{$posY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;"><xsl:value-of select="."/></text>                
-                    </xsl:matching-substring>
-                </xsl:analyze-string>
+                
+                <xsl:choose>
+                    <!-- From left to right -->
+                    <xsl:when test="$row mod 2 = 0"> 
+                        <xsl:variable name="posX" select="$column*175 + $startX" />
+                        <xsl:variable name="posY" select="$row*83 + $startY" />
+                        <xsl:analyze-string select="./@uri" regex="^[^:]+">
+                            <xsl:matching-substring>
+                                <xsl:choose>
+                                    <xsl:when test="$i mod 3 = 0">
+                                        <polyline points="{($posX+62)},{($posY)-32} {($posX+62)},{($posY)-12}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />
+                                    </xsl:when>
+                                    <xsl:otherwise>                                    
+                                        <polyline points="{($posX)-50},{($posY)+25} {($posX)-14},{($posY)+25}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />                          
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                
+                                <rect x="{$posX}" y="{$posY}" width="125" height="50" fill="#CCFFFF" />                
+                                <text x="{$posX+25}" y="{$posY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
+                                    <xsl:value-of select="."/>
+                                </text>                
+                            </xsl:matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:when> 
+                     
+                    <!-- From right to left -->
+                    <xsl:otherwise> 
+                        <xsl:variable name="posX" select="(2-$column)*175 + $startX" />
+                        <xsl:variable name="posY" select="$row*83 + $startY" />
+                        <xsl:analyze-string select="./@uri" regex="^[^:]+">
+                            <xsl:matching-substring>
+                                <xsl:choose>
+                                    <xsl:when test="$i mod 3 = 0">
+                                        <polyline points="{($posX+62)},{($posY)-32} {($posX+62)},{($posY)-12}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />
+                                    </xsl:when>
+                                    <xsl:otherwise>                                    
+                                        <polyline points="{($posX)+125+50},{($posY)+25} {($posX)+125+14},{($posY)+25}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />                          
+                                    </xsl:otherwise>
+                                </xsl:choose>
+                                
+                                <rect x="{$posX}" y="{$posY}" width="125" height="50" fill="#CCFFFF" />                
+                                <text x="{$posX+25}" y="{$posY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
+                                    <xsl:value-of select="."/>
+                                </text>                
+                            </xsl:matching-substring>
+                        </xsl:analyze-string>
+                    </xsl:otherwise>
+                </xsl:choose>
+                               
+                
+                
             </xsl:for-each>
 
             <!-- CIRCLE LEFT TOP -->
@@ -99,10 +145,14 @@
             <xsl:analyze-string select="//camel:camelContext/camel:route/camel:from/@uri" regex='(.*?)://(.*?)\?value=.*?'>
                 <xsl:matching-substring>
                     <!--PH7 text-->
-                    <text x="137" y="70" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 32px;"><xsl:value-of select="translate(regex-group(2), $smallcase, $uppercase)"/></text>
+                    <text x="137" y="70" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 32px;">
+                        <xsl:value-of select="translate(regex-group(2), $smallcase, $uppercase)"/>
+                    </text>
                     
                     <!--GPIO text-->
-                    <text x="115" y="95" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 16px;"><xsl:value-of select="translate(regex-group(1), $smallcase, $uppercase)"/></text>
+                    <text x="115" y="95" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 16px;">
+                        <xsl:value-of select="translate(regex-group(1), $smallcase, $uppercase)"/>
+                    </text>
                 </xsl:matching-substring>
             </xsl:analyze-string>
 
