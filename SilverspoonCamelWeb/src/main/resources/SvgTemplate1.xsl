@@ -27,73 +27,99 @@
            
             <!-- Route FROM -->
             <xsl:if test="//camel:camelContext/camel:route/camel:from">
+                <!-- route rectangle -->
+                <rect x="{$startX}" y="{$startY}" width="125" height="50" fill="#CCFFFF" />
+                <!-- route rectangle text -->
                 <xsl:analyze-string select="//camel:camelContext/camel:route/camel:from/@uri" regex="^[^:]+">
                     <xsl:matching-substring>
-                        <rect x="{$startX}" y="{$startY}" width="125" height="50" fill="#CCFFFF" />
                         <text x="{$startX+25}" y="{$startY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
                             <xsl:value-of select="."/>
                         </text>
-                    </xsl:matching-substring>                
+                    </xsl:matching-substring>    
                 </xsl:analyze-string>
+                <!-- line -->
+                <polyline points="167,80 167,{($startY)-12}"
+                          fill="none" stroke="white" 
+                          stroke-width="4"
+                          stroke-dasharray="5 5"
+                          marker-end="url(#markerArrow)" />    
+
             </xsl:if>
             
             <!-- Route TO -->
             <xsl:for-each select="//camel:camelContext/camel:route/camel:to">
                 <xsl:variable name="i" select="position()" />
+                <xsl:variable name="last" select="last()"/>
                 <xsl:variable name="row" select="(($i div 3)-(($i mod 3) div 3))"/>
                 <xsl:variable name="column" select="$i mod 3"/>
-                
-                
+                                
                 <xsl:choose>
-                    <!-- From left to right -->
+                    <!-- from LEFT to RIGHT -->
                     <xsl:when test="$row mod 2 = 0"> 
                         <xsl:variable name="posX" select="$column*175 + $startX" />
                         <xsl:variable name="posY" select="$row*83 + $startY" />
+                        <!-- arrows between route rectangles -->
+                        <xsl:choose>
+                            <xsl:when test="$i mod 3 = 0">
+                                <polyline points="{($posX+62)},{($posY)-32} {($posX+62)},{($posY)-12}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />
+                            </xsl:when>
+                            <xsl:otherwise>                                    
+                                <polyline points="{($posX)-50},{($posY)+25} {($posX)-14},{($posY)+25}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />                          
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <!-- route rectangle -->
+                        <rect x="{$posX}" y="{$posY}" width="125" height="50" fill="#CCFFFF" /> 
+                        <!-- route rectangle text -->
                         <xsl:analyze-string select="./@uri" regex="^[^:]+">
                             <xsl:matching-substring>
-                                <xsl:choose>
-                                    <xsl:when test="$i mod 3 = 0">
-                                        <polyline points="{($posX+62)},{($posY)-32} {($posX+62)},{($posY)-12}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />
-                                    </xsl:when>
-                                    <xsl:otherwise>                                    
-                                        <polyline points="{($posX)-50},{($posY)+25} {($posX)-14},{($posY)+25}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />                          
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                
-                                <rect x="{$posX}" y="{$posY}" width="125" height="50" fill="#CCFFFF" />                
                                 <text x="{$posX+25}" y="{$posY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
                                     <xsl:value-of select="."/>
-                                </text>                
+                                </text>  
                             </xsl:matching-substring>
                         </xsl:analyze-string>
+                        <!-- line to Ethernet box -->
+                        <xsl:if test="$i = $last">
+                            <polyline points="{$posX+125},{$posY+32} 640,{$posY+32} 640,400 660,400"
+                                      fill="none" stroke="white" 
+                                      stroke-width="4"
+                                      stroke-dasharray="5 5"
+                                      marker-end="url(#markerArrow)" />
+                        </xsl:if>           
                     </xsl:when> 
                      
-                    <!-- From right to left -->
+                    <!-- from RIGHT to LEFT -->
                     <xsl:otherwise> 
                         <xsl:variable name="posX" select="(2-$column)*175 + $startX" />
                         <xsl:variable name="posY" select="$row*83 + $startY" />
+                        <!-- arrows between route rectangles -->
+                        <xsl:choose>
+                            <xsl:when test="$i mod 3 = 0">
+                                <polyline points="{($posX+62)},{($posY)-32} {($posX+62)},{($posY)-12}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />
+                            </xsl:when>
+                            <xsl:otherwise>                                    
+                                <polyline points="{($posX)+125+50},{($posY)+25} {($posX)+125+14},{($posY)+25}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />                          
+                            </xsl:otherwise>
+                        </xsl:choose>
+                        <!-- route rectangle -->
+                        <rect x="{$posX}" y="{$posY}" width="125" height="50" fill="#CCFFFF" />  
+                        <!-- route rectangle text -->
                         <xsl:analyze-string select="./@uri" regex="^[^:]+">
                             <xsl:matching-substring>
-                                <xsl:choose>
-                                    <xsl:when test="$i mod 3 = 0">
-                                        <polyline points="{($posX+62)},{($posY)-32} {($posX+62)},{($posY)-12}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />
-                                    </xsl:when>
-                                    <xsl:otherwise>                                    
-                                        <polyline points="{($posX)+125+50},{($posY)+25} {($posX)+125+14},{($posY)+25}" fill="none" stroke="white" stroke-width="4" marker-end="url(#markerArrow)" />                          
-                                    </xsl:otherwise>
-                                </xsl:choose>
-                                
-                                <rect x="{$posX}" y="{$posY}" width="125" height="50" fill="#CCFFFF" />                
                                 <text x="{$posX+25}" y="{$posY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
                                     <xsl:value-of select="."/>
-                                </text>                
+                                </text>    
                             </xsl:matching-substring>
                         </xsl:analyze-string>
+                        <!-- line to Ethernet box -->
+                        <xsl:if test="$i = $last">
+                            <polyline points="{$posX+125},{$posY+32} 640,{$posY+32} 640,400 660,400"
+                                              fill="none" stroke="white" 
+                                              stroke-width="4"
+                                              stroke-dasharray="5 5"
+                                              marker-end="url(#markerArrow)" />
+                        </xsl:if>   
                     </xsl:otherwise>
                 </xsl:choose>
-                               
-                
-                
             </xsl:for-each>
 
             <!-- CIRCLE LEFT TOP -->
@@ -141,7 +167,6 @@
             <rect x = "530" y = "35" rx = "10" ry = "10" width = "22" height = "45" fill = "#282828"/>
             <rect x = "552" y = "35" rx = "10" ry = "10" width = "22" height = "45" fill = "#282828"/>
 
-            
             <xsl:analyze-string select="//camel:camelContext/camel:route/camel:from/@uri" regex='(.*?)://(.*?)\?value=.*?'>
                 <xsl:matching-substring>
                     <!--PH7 text-->
@@ -172,19 +197,7 @@
                     <path d="M 0 0 L 10 5 L 0 10 z" />
                 </marker>
             </defs>
-
-            <!-- LINES -->
-            <polyline points="167,80 167,{($startY)-12}"
-                      fill="none" stroke="white" 
-                      stroke-width="4"
-                      stroke-dasharray="5 5"
-                      marker-end="url(#markerArrow)" />
-
-            <polyline points="600,275 640,275 640,400 660,400"
-                      fill="none" stroke="white" 
-                      stroke-width="4"
-                      stroke-dasharray="5 5"
-                      marker-end="url(#markerArrow)" />
+            
         </svg>
     </xsl:template>
 </xsl:stylesheet>
