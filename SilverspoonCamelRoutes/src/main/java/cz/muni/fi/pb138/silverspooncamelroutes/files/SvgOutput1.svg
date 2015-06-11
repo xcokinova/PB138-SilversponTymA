@@ -5,19 +5,46 @@
      xmlns:xlink="http://www.w3.org/1999/xLink">
    <rect x="25" y="25" rx="35" ry="35" width="800" height="500" fill="green"/>
    <rect x="100" y="150" width="525" height="250" fill="#282828"/>
-   <rect x="125" y="250" width="125" height="50" fill="#CCFFFF"/>
-   <text x="152" y="282" font-family="Verdana"
+   <rect x="125" y="167" width="125" height="50" fill="#CCFFFF"/>
+   <text x="150" y="199" font-family="Verdana"
          style="fill: #000000; stroke: none; font-size: 32px;">gpio</text>
-   <polyline points="250,275 286,275" fill="none" stroke="white" stroke-width="4"
+   <polyline points="167,80 167,155" fill="none" stroke="white" stroke-width="4"
+             stroke-dasharray="5 5"
              marker-end="url(#markerArrow)"/>
-   <rect x="300" y="250" width="125" height="50" fill="#CCFFFF"/>
-   <text x="325" y="282" font-family="Verdana"
-         style="fill: #000000; stroke: none; font-size: 32px;">bean</text>
-   <polyline points="425,275 461,275" fill="none" stroke="white" stroke-width="4"
+   <polyline points="250,192 286,192" fill="none" stroke="white" stroke-width="4"
+             marker-end="url(#markerArrow)"/>
+   <rect x="300" y="167" width="125" height="50" fill="#CCFFFF"/>
+   <text x="325" y="199" font-family="Verdana"
+         style="fill: #000000; stroke: none; font-size: 32px;">1bean</text>
+   <polyline points="425,192 461,192" fill="none" stroke="white" stroke-width="4"
+             marker-end="url(#markerArrow)"/>
+   <rect x="475" y="167" width="125" height="50" fill="#CCFFFF"/>
+   <text x="500" y="199" font-family="Verdana"
+         style="fill: #000000; stroke: none; font-size: 32px;">2mqtt</text>
+   <polyline points="537,218 537,238" fill="none" stroke="white" stroke-width="4"
              marker-end="url(#markerArrow)"/>
    <rect x="475" y="250" width="125" height="50" fill="#CCFFFF"/>
    <text x="500" y="282" font-family="Verdana"
-         style="fill: #000000; stroke: none; font-size: 32px;">mqtt</text>
+         style="fill: #000000; stroke: none; font-size: 32px;">3aaaaa</text>
+   <polyline points="475,275 439,275" fill="none" stroke="white" stroke-width="4"
+             marker-end="url(#markerArrow)"/>
+   <rect x="300" y="250" width="125" height="50" fill="#CCFFFF"/>
+   <text x="325" y="282" font-family="Verdana"
+         style="fill: #000000; stroke: none; font-size: 32px;">4bbbbb</text>
+   <polyline points="300,275 264,275" fill="none" stroke="white" stroke-width="4"
+             marker-end="url(#markerArrow)"/>
+   <rect x="125" y="250" width="125" height="50" fill="#CCFFFF"/>
+   <text x="150" y="282" font-family="Verdana"
+         style="fill: #000000; stroke: none; font-size: 32px;">5ccccc</text>
+   <polyline points="187,301 187,321" fill="none" stroke="white" stroke-width="4"
+             marker-end="url(#markerArrow)"/>
+   <rect x="125" y="333" width="125" height="50" fill="#CCFFFF"/>
+   <text x="150" y="365" font-family="Verdana"
+         style="fill: #000000; stroke: none; font-size: 32px;">6ddddd</text>
+   <polyline points="250,365 640,365 640,400 660,400" fill="none" stroke="white"
+             stroke-width="4"
+             stroke-dasharray="5 5"
+             marker-end="url(#markerArrow)"/>
    <circle cx="60" cy="60" r="20"
            style="stroke:#999966;                            stroke-width: 12;                            fill:#CCCC99"/>
    <circle cx="605" cy="60" r="20"
@@ -47,7 +74,6 @@
    <rect x="486" y="35" rx="10" ry="10" width="22" height="45" fill="#282828"/>
    <rect x="508" y="35" rx="10" ry="10" width="22" height="45" fill="#282828"/>
    <rect x="530" y="35" rx="10" ry="10" width="22" height="45" fill="#282828"/>
-   <rect x="552" y="35" rx="10" ry="10" width="22" height="45" fill="#282828"/>
    <text x="137" y="70" font-family="Verdana"
          style="fill: #FFFFFF; stroke: none; font-size: 32px;">PH7</text>
    <text x="115" y="95" font-family="Verdana"
@@ -64,11 +90,4 @@
          <path d="M 0 0 L 10 5 L 0 10 z"/>
       </marker>
    </defs>
-   <polyline points="167,80 167,238" fill="none" stroke="white" stroke-width="4"
-             stroke-dasharray="5 5"
-             marker-end="url(#markerArrow)"/>
-   <polyline points="600,275 640,275 640,400 660,400" fill="none" stroke="white"
-             stroke-width="4"
-             stroke-dasharray="5 5"
-             marker-end="url(#markerArrow)"/>
 </svg>

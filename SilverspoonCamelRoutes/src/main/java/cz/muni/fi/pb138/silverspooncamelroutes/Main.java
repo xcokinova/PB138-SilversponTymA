@@ -1,44 +1,52 @@
 package cz.muni.fi.pb138.silverspooncamelroutes;
 
 
+
 import java.io.*;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
 
-public class XSLTransformator {
+/**
+ *
+ * @author jana
+ */
+public class Main {
     
-    public File transform(File file, File directory) {
+    public static void main(String[] args) throws TransformerException {
         // set the TransformFactory to use the Saxon TransformerFactoryImpl method 
         System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
-        ClassLoader classLoader = getClass().getClassLoader();
+        
         String filesDir = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\muni\\fi\\pb138\\silverspooncamelroutes\\files\\";
+        
         try {
             TransformerFactory tFactory = TransformerFactory.newInstance();
 
-            Source xslDoc = new StreamSource(classLoader.getResource("SvgTemplate1.xsl").getFile());
-            Source xmlDoc = new StreamSource(file);
+            Source xslDoc = new StreamSource(filesDir + "SvgTemplate1.xsl");
+            Source xmlDoc = new StreamSource(filesDir + "Input.xml");
             
-            File outFile = File.createTempFile("tmp", ".svg", directory);
-            
-            OutputStream htmlFile = new FileOutputStream(outFile);
+            String outputFileName = filesDir + "SvgOutput1.svg";
+
+            OutputStream htmlFile = new FileOutputStream(outputFileName);
             Transformer trasform = tFactory.newTransformer(xslDoc);
             trasform.transform(xmlDoc, new StreamResult(htmlFile));
-            
-            return outFile;
         } 
-        catch (TransformerException e) 
-        {
-            throw new XSLTransformatorException(e);
-        }
         catch (FileNotFoundException e) 
         {
-            throw new XSLTransformatorException(e);
+            e.printStackTrace();
         }
-        catch (IOException e) 
+        /*
+        catch (TransformerConfigurationException e) 
         {
-            throw new XSLTransformatorException(e);
+            e.printStackTrace();
         }
-
+        catch (TransformerFactoryConfigurationError e) 
+        {
+            e.printStackTrace();
+        }
+        catch (TransformerException e) 
+        {
+            e.printStackTrace();
+        }*/
     }
     
 }
