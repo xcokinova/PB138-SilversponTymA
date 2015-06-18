@@ -111,6 +111,7 @@
         </svg>
     </xsl:template>
     
+    <!-- FROM TEMPLATE -->
     <xsl:template name="routeFrom" match="//camel:camelContext/camel:route/camel:from">
         <!-- route rectangle -->
         <rect x="{$startX}" y="{$startY}" width="125" height="50" fill="#CCFFFF" />
@@ -130,6 +131,7 @@
                   marker-end="url(#markerArrow)" />   
     </xsl:template>
     
+    <!-- TO TEMPLATE -->
     <xsl:template name="routeTo">
         <xsl:param name="posX" />  
         <xsl:param name="posY" /> 
