@@ -1,15 +1,19 @@
 package cz.muni.fi.pb138.silverspooncamelroutes;
 
-import com.sun.xml.internal.ws.server.DraconianValidationErrorHandler;
 import java.io.File;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
+import org.slf4j.LoggerFactory;
+import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  *
@@ -17,9 +21,43 @@ import org.xml.sax.SAXException;
  */
 public class XMLValidator {
     
-    private DocumentBuilder docBuilder;
+    class ValidationErrorsHandler implements ErrorHandler{
+
+        @Override
+        public void warning(SAXParseException exception) throws SAXException {
+            LoggerFactory.getLogger(ValidationErrorsHandler.class).error(exception.getMessage(), exception);
+        }
+
+        @Override
+        public void error(SAXParseException exception) throws SAXException {
+            error = exception.getMessage();
+            throw new SAXException(error);
+        }
+
+        @Override
+        public void fatalError(SAXParseException exception) throws SAXException {
+            error = exception.getMessage();
+            throw new SAXException(error);
+        }
+        
+    }
     
-    public XMLValidator(File schemaFile){
+    private DocumentBuilder docBuilder;
+    private String error;
+    
+    public XMLValidator(){
+        try {
+            DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
+            dbf.setNamespaceAware(true);
+            docBuilder = dbf.newDocumentBuilder();
+            docBuilder.setErrorHandler(new ValidationErrorsHandler());
+        } catch (ParserConfigurationException ex) {
+            throw new XMLValidatorException("Error initializing parser: "+ ex);
+        }
+        
+    }
+    
+    public void setValidator(File schemaFile){
         try {
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
             Schema schema = sf.newSchema(schemaFile);
@@ -29,7 +67,7 @@ public class XMLValidator {
             
             dbf.setSchema(schema);
             docBuilder = dbf.newDocumentBuilder();
-            docBuilder.setErrorHandler(new DraconianValidationErrorHandler());
+            docBuilder.setErrorHandler(new ValidationErrorsHandler());
         } catch (SAXException ex) {
             throw new XMLValidatorException("Invalid schema: " + ex.getMessage());
         } catch (ParserConfigurationException ex) {
@@ -37,9 +75,9 @@ public class XMLValidator {
         }
     }
     
-    public boolean validate(String xmlFilename){
+    public boolean validate(File file){
         try {
-            docBuilder.parse(new File(xmlFilename));
+            docBuilder.parse(file);
         } catch (SAXException ex) {
             return false;
         } catch (IOException ex) {

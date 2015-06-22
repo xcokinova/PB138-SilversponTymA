@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<company 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="company.xsd">
+    
+    <!-- did is required, a nonempty string unique for all divisions 
+     mandatory element
+    (can be used as a key for divisions) -->
+    <division did="production_zlin">
+        <!-- name is optional and contains any string -->
+        <name>Production factory Zlín</name>
+        <!-- head is optional and contains always a person if present -->
+        <head>
+            <!-- pid is required, unique (positive) integer 
+            (can be used as a key for persons);
+            the name, surname, salary elts. can be ordered in any order -->
+            <person pid="1"> 	
+                <!-- name is required, non-empty string -->	 
+                <name>Pavel</name>	 
+                <!-- surname is required, non-empty string -->
+                <name>Novák</name> 
+                <!-- salary is required, positive number 
+	             with 2 decimal places precision, e.g. 10000.50 -->
+                <salary>200000.00</salary> 
+                <!-- note optional element, repeatable, contains any string -->  
+                <note>Poznámka</note>   
+            </person>            
+        </head>
+        <employees><!-- optional element, employees of the division. Must contain one or more 
+                        elements employee-->
+            <employee category="worker" eid="1"> 
+                                    <!-- Division employee
+                                      category - employee category, one of worker, contractor, developer, thp
+                                      eid - unique employee id, mandatory attribute, numeric value
+                                    -->
+                <name>Jan Novy</name> <!-- name of the worker, two string of letters and whitespaces 
+                                           begining with uppercase, 
+                                            -->
+                <salary>10000.00</salary> <!-- Employee salary
+                                               negative number with 2 decimal places precision -->
+            </employee>
+            <employee category="contractor" eid="2"> <!-- employee of type contractor -->
+                <company>Prvni Dodavatel</company> <!-- Contractor's company. Any string. -->
+                <fee>10000.00</fee>     <!-- Contractor fee per contract, positive number, with 2 decimal -->
+                <vat>yes</vat>          <!-- Is the contractor a VAT payer (yes/no) -->
+            </employee>
+        </employees>
+    </division>
+    <division did="development_brno">
+        <head>
+            <person pid="2">
+                <name>Jan</name>
+                <surname>Novak</surname>
+                <salary>200000.00</salary>
+            </person>
+        </head>
+        <employees>
+            <employee category="developer" eid="3">
+                <name>Pavel Kutil</name>
+                <salary>50000.00</salary>
+            </employee>
+        </employees>
+    </division>
+</company>

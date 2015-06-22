@@ -15,5 +15,10 @@ public class SpringConfig {
     public XSLTransformator xslTransformator() {
         return new XSLTransformator();
     }
+    
+    @Bean
+    public XMLValidator xmlValidator() {
+        return new XMLValidator();
+    }
 }
 
