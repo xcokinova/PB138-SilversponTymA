@@ -11,7 +11,7 @@ public class XSLTransformator {
         // set the TransformFactory to use the Saxon TransformerFactoryImpl method 
         System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
         ClassLoader classLoader = getClass().getClassLoader();
-        String filesDir = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\muni\\fi\\pb138\\silverspooncamelroutes\\files\\";
+        // String filesDir = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\muni\\fi\\pb138\\silverspooncamelroutes\\files\\";
         try {
             TransformerFactory tFactory = TransformerFactory.newInstance();
 
