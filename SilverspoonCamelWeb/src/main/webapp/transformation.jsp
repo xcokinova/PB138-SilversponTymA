@@ -52,7 +52,7 @@
             <input type="submit" value="Upload" /><br/>
         </form>  
         <c:if test="${not empty resultSVG}">
-            <img src="../${resultSVG}" width="950" height="540" alt="" />
+            <img src="../${resultSVG}" width="950" height="540" alt="result image" />
         </c:if>
     </body>
 </html>
