@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    <xs:element name="beans" type="beansType" />
+    
+    <xs:complexType name="beansType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element name="bean" type="xs:anyType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="camelContext" type="camelContextType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="camelContextType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element name="route" type="routeType" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="routeType">
+        <xs:sequence minOccurs="1" maxOccurs="1">
+            <xs:element name="from" minOccurs="1" maxOccurs="1" type="toType" />
+            <xs:element name="to" minOccurs="1" maxOccurs="8" type="toType" />
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="toType">
+        <xs:simpleContent>
+            <xs:extension base ="xs:string">
+                <xs:attribute name="uri" type="xs:string" />
+            </xs:extension>    
+        </xs:simpleContent>
+    </xs:complexType>
+                    
+</xs:schema>

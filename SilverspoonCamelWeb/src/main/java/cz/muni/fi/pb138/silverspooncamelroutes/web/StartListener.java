@@ -1,6 +1,7 @@
 package cz.muni.fi.pb138.silverspooncamelroutes.web;
 
 import cz.muni.fi.pb138.silverspooncamelroutes.SpringConfig;
+import cz.muni.fi.pb138.silverspooncamelroutes.XMLValidator;
 import cz.muni.fi.pb138.silverspooncamelroutes.XSLTransformator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class StartListener implements ServletContextListener {
         ServletContext servletContext = ev.getServletContext();
         ApplicationContext springContext = new AnnotationConfigApplicationContext(SpringConfig.class);
         servletContext.setAttribute("xslTransformator", springContext.getBean("xslTransformator", XSLTransformator.class));
+        servletContext.setAttribute("xmlValidator", springContext.getBean("xmlValidator", XMLValidator.class));
         log.info("manažéri vytvorení");
     }
 

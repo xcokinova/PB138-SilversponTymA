@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" 
                 xmlns="http://www.w3.org/2000/svg"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-                xmlns:beans="http://www.springframework.org/schema/beans" 
-                xmlns:camel="http://camel.apache.org/schema/spring">
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
     <xsl:output method="xml" indent="yes" standalone="yes" media-type="image/svg" />
     <!-- Chars for translate to lowercase/uppercase -->
     <xsl:variable name="smallcase" select="'abcdefghijklmnopqrstuvwxyz'" />
@@ -26,10 +24,10 @@
             <rect x = "100" y = "150" width = "525" height = "250" fill = "#282828"/>
             
             <!-- Route FROM -->
-            <xsl:apply-templates select="//camel:camelContext/camel:route/camel:from"/>
+            <xsl:apply-templates select="//camelContext/route/from"/>
             
             <!-- Route TO -->
-            <xsl:for-each select="//camel:camelContext/camel:route/camel:to">
+            <xsl:for-each select="//camelContext/route/to">
                 <xsl:variable name="row" select="((position() div 3)-((position() mod 3) div 3))"/>
                 <xsl:variable name="column" select="position() mod 3"/>
                 <xsl:choose>  
@@ -79,7 +77,7 @@
                 <xsl:with-param name="x" select="90"/>
             </xsl:call-template>
 
-            <xsl:analyze-string select="//camel:camelContext/camel:route/camel:from/@uri" regex='(.*?)://(.*?)\?value=.*?'>
+            <xsl:analyze-string select="//camelContext/route/from/@uri" regex='(.*?)://(.*?)\?value=.*?'>
                 <xsl:matching-substring>
                     <!--PH7 text-->
                     <text x="137" y="70" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 32px;">
@@ -112,11 +110,11 @@
     </xsl:template>
     
     <!-- FROM TEMPLATE -->
-    <xsl:template name="routeFrom" match="//camel:camelContext/camel:route/camel:from">
+    <xsl:template name="routeFrom" match="//camelContext/route/from">
         <!-- route rectangle -->
         <rect x="{$startX}" y="{$startY}" width="125" height="50" fill="#CCFFFF" />
         <!-- route rectangle text -->
-        <xsl:analyze-string select="//camel:camelContext/camel:route/camel:from/@uri" regex="^[^:]+">
+        <xsl:analyze-string select="//camelContext/route/from/@uri" regex="^[^:]+">
             <xsl:matching-substring>
                 <text x="{$startX+25}" y="{$startY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
                     <xsl:value-of select="."/>

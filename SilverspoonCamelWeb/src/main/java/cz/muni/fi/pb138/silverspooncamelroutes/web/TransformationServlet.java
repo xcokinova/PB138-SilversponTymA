@@ -1,5 +1,7 @@
 package cz.muni.fi.pb138.silverspooncamelroutes.web;
 
+import cz.muni.fi.pb138.silverspooncamelroutes.XMLValidator;
+import cz.muni.fi.pb138.silverspooncamelroutes.XMLValidatorException;
 import cz.muni.fi.pb138.silverspooncamelroutes.XSLTransformator;
 import cz.muni.fi.pb138.silverspooncamelroutes.XSLTransformatorException;
 import java.io.File;
@@ -71,6 +73,19 @@ public class TransformationServlet extends HttpServlet {
                         log.error("File" + file + "being uploaded to" + directory);
                         
                         try {
+                            getXMLValidator().setValidator(new File(classLoader.getResource("CamelSchema.xsd").getFile()));
+                            if(!getXMLValidator().validate(file)){
+                                request.setAttribute("chyba", "Nevalidný XML súbor.");
+                                initializePage(request, response);
+                                return;
+                            }
+                        } catch(XMLValidatorException ex){
+                            log.error("Error while validating file " + file, ex);
+                            response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, ex.getMessage());
+                            return;
+                        }
+                        
+                        try {
                             File outSVG = getXSLTransformator().transform(file, directory, scheme);                           
                             request.setAttribute("resultSVG", outSVG.getName());
                             initializePage(request, response);
@@ -98,6 +113,10 @@ public class TransformationServlet extends HttpServlet {
      */
     private XSLTransformator getXSLTransformator() {
         return (XSLTransformator) getServletContext().getAttribute("xslTransformator");
+    }
+    
+    private XMLValidator getXMLValidator() {
+        return (XMLValidator) getServletContext().getAttribute("xmlValidator");
     }
     
     private void initializePage(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
