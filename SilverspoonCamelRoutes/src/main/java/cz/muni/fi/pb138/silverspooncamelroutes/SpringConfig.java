@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 /**
 * Spring Java configuration class. See http://static.springsource.org/spring/docs/current/spring-framework-reference/html/beans.html#beans-java
 *
-* @author Viktor Bako (422557)
+* @author PB138-SilverspoonTymA
 */
 @Configuration
 public class SpringConfig {

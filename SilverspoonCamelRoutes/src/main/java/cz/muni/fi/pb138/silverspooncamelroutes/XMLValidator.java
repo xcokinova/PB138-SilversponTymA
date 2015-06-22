@@ -2,8 +2,6 @@ package cz.muni.fi.pb138.silverspooncamelroutes;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -16,11 +14,15 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- *
- * @author viktor
+ * Class representing XSD validator which validates given XML files.
+ * 
+ * @author PB138-SilverspoonTymA
  */
 public class XMLValidator {
     
+    /**
+     * Handler for validation errors.
+     */
     class ValidationErrorsHandler implements ErrorHandler{
 
         @Override
@@ -45,6 +47,9 @@ public class XMLValidator {
     private DocumentBuilder docBuilder;
     private String error;
     
+    /**
+     * Constructor which initialize document builder.
+     */
     public XMLValidator(){
         try {
             DocumentBuilderFactory dbf=DocumentBuilderFactory.newInstance();
@@ -57,6 +62,11 @@ public class XMLValidator {
         
     }
     
+    /**
+     * Sets given XSD schema as validator.
+     * 
+     * @param schemaFile XSD schema for validation
+     */
     public void setValidator(File schemaFile){
         try {
             SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
@@ -75,6 +85,12 @@ public class XMLValidator {
         }
     }
     
+    /**
+     * Decide if given XML file si valid or not.
+     * 
+     * @param file file to check
+     * @return true if is valid
+     */
     public boolean validate(File file){
         try {
             docBuilder.parse(file);

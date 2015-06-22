@@ -1,5 +1,10 @@
 package cz.muni.fi.pb138.silverspooncamelroutes;
 
+/**
+ * Exception representing problem in XSLTransformator.
+ * 
+ * @author PB138-SilverspoonTymA
+ */
 public class XSLTransformatorException extends RuntimeException {
 
     public XSLTransformatorException(String msg) {

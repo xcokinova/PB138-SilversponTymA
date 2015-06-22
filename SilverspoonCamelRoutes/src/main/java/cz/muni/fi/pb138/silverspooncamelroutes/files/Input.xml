@@ -11,10 +11,10 @@
             <from uri="gpio://ph7?value=HIGH" />
             <to uri="1bean:webCamBean?method=getPicture" />
             <to uri="2mqtt://iot-demo?host=tcp://localhost:1883&amp;publishTopicName=IotDemo"/>
-            <to uri="3aaaaa:webCamBean?method=getPicture" />
-            <to uri="4bbbbb://iot-demo?host=tcp://localhost:1883&amp;publishTopicName=IotDemo"/>
-            <to uri="5ccccc:webCamBean?method=getPicture" />
-            <to uri="6ddddd:webCamBean?method=getPicture" />
+            <to uri="3aaaa:webCamBean?method=getPicture" />
+            <to uri="4bbbb://iot-demo?host=tcp://localhost:1883&amp;publishTopicName=IotDemo"/>
+            <to uri="5cccc:webCamBean?method=getPicture" />
+            <to uri="6dddd:webCamBean?method=getPicture" />
         </route>
     </camelContext>
 </beans>

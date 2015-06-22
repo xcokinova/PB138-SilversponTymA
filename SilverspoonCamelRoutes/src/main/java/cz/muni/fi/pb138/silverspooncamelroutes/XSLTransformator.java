@@ -5,8 +5,21 @@ import java.io.*;
 import javax.xml.transform.*;
 import javax.xml.transform.stream.*;
 
+/**
+ * Class representing XSLT transformator.
+ * 
+ * @author PB138-SilverspoonTymA
+ */
 public class XSLTransformator {
     
+    /**
+     * Transform file by given scheme and save it to the given directory.
+     * 
+     * @param file file to transform
+     * @param directory where save file
+     * @param scheme scheme to transform file by
+     * @return transformed file
+     */
     public File transform(File file, File directory, File scheme) {
         
         if(file == null) throw new XSLTransformatorException(new NullPointerException("file"));
@@ -15,7 +28,7 @@ public class XSLTransformator {
         
         // set the TransformFactory to use the Saxon TransformerFactoryImpl method 
         System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
-        // String filesDir = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\muni\\fi\\pb138\\silverspooncamelroutes\\files\\";
+        
         try {
             TransformerFactory tFactory = TransformerFactory.newInstance();
 

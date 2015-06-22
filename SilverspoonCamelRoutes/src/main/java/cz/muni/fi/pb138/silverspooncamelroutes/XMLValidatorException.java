@@ -1,8 +1,9 @@
 package cz.muni.fi.pb138.silverspooncamelroutes;
 
 /**
- *
- * @author viktor
+ * Exception representing problem in XMLValidator.
+ * 
+ * @author PB138-SilverspoonTymA
  */
 public class XMLValidatorException extends RuntimeException {
     
