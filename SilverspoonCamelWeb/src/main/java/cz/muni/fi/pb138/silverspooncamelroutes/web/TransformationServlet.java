@@ -20,7 +20,7 @@ import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.Part;
 
 /**
- * Servlet for managing books.
+ * Servlet for managing silverspoon.io visualisation.
  */
 @WebServlet(TransformationServlet.URL_MAPPING + "/*")
 @MultipartConfig
@@ -46,18 +46,21 @@ public class TransformationServlet extends HttpServlet {
                 int type = Integer.parseInt(request.getParameter("type"));
                 Part filePart = request.getPart("file"); 
                 
+                // decide which scheme will be used
                 File scheme = null;
                 ClassLoader classLoader = getClass().getClassLoader();
                 if(type == 1) scheme = new File(classLoader.getResource("SvgTemplate1.xsl").getFile());
                 if(type == 2) scheme = new File(classLoader.getResource("BeagleBoneBlack.xsl").getFile());
                 if(type == 3) scheme = new File(classLoader.getResource("CubieBoard2.xsl").getFile());
                 
+                // check file size
                 if(filePart.getSize() == 0){
                     request.setAttribute("chyba", "Musíte vybrať XML súbor.");
                     initializePage(request, response);
                     return;
                 }
-                                             
+                           
+                // create temp file
                 File directory = new File(getServletContext().getRealPath("/"));
                 File file = File.createTempFile("tmp", ".xml", directory);
                 
@@ -67,11 +70,13 @@ public class TransformationServlet extends HttpServlet {
                         int read;
                         final byte[] bytes = new byte[1024];
 
+                        // copy content from uploaded file to temp file
                         while ((read = filecontent.read(bytes)) != -1) {
                             out.write(bytes, 0, read);
                         }
                         log.error("File" + file + "being uploaded to" + directory);
                         
+                        // validate file
                         try {
                             getXMLValidator().setValidator(new File(classLoader.getResource("CamelSchema.xsd").getFile()));
                             if(!getXMLValidator().validate(file)){
@@ -85,6 +90,7 @@ public class TransformationServlet extends HttpServlet {
                             return;
                         }
                         
+                        // transform file
                         try {
                             File outSVG = getXSLTransformator().transform(file, directory, scheme);                           
                             request.setAttribute("resultSVG", outSVG.getName());
@@ -106,11 +112,6 @@ public class TransformationServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Gets BookManager from ServletContext, where it was stored by {@link StartListener}.
-     *
-     * @return BookManager instance
-     */
     private XSLTransformator getXSLTransformator() {
         return (XSLTransformator) getServletContext().getAttribute("xslTransformator");
     }
