@@ -19,12 +19,40 @@
             </div>
         </c:if>
         <form method="POST" action="${pageContext.request.contextPath}/transformation/upload" enctype="multipart/form-data" >
-            XML súbor
-            <input type="file" name="file" id="file" /> <br/>
-            <input type="submit" value="Upload" />
+            <label for="type">Typ dosky</table>
+            <select name="type" id="type">
+                <c:choose>
+                    <c:when test="${param.type == 1}">
+                        <option value="1" selected>Raspberry Pi 2</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="1">Raspberry Pi 2</option>
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${param.type == 2}">
+                        <option value="2" selected>BeagleBoneBlack</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="2">BeagleBoneBlack</option>
+                    </c:otherwise>
+                </c:choose>
+                <c:choose>
+                    <c:when test="${param.type == 3}">
+                        <option value="3" selected>CubieBoard 2</option>
+                    </c:when>
+                    <c:otherwise>
+                        <option value="3">CubieBoard 2</option>
+                    </c:otherwise>
+                </c:choose>
+            </select><br />
+            
+            <label for="file">XML súbor</table>           
+            <input type="file" name="file" id="file" /><br/>
+            <input type="submit" value="Upload" /><br/>
         </form>  
         <c:if test="${not empty resultSVG}">
-            <img src="../${resultSVG}" width="1000" height="600" alt="" />
+            <img src="../${resultSVG}" width="950" height="540" alt="" />
         </c:if>
     </body>
 </html>

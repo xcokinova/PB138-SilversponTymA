@@ -41,9 +41,15 @@ public class TransformationServlet extends HttpServlet {
         String action = request.getPathInfo();
         switch (action) {
             case "/upload":
-                
+                int type = Integer.parseInt(request.getParameter("type"));
                 Part filePart = request.getPart("file"); 
-                 
+                
+                File scheme = null;
+                ClassLoader classLoader = getClass().getClassLoader();
+                if(type == 1) scheme = new File(classLoader.getResource("SvgTemplate1.xsl").getFile());
+                if(type == 2) scheme = new File(classLoader.getResource("BeagleBoneBlack.xsl").getFile());
+                if(type == 3) scheme = new File(classLoader.getResource("CubieBoard2.xsl").getFile());
+                
                 if(filePart.getSize() == 0){
                     request.setAttribute("chyba", "Musíte vybrať XML súbor.");
                     initializePage(request, response);
@@ -65,7 +71,7 @@ public class TransformationServlet extends HttpServlet {
                         log.error("File" + file + "being uploaded to" + directory);
                         
                         try {
-                            File outSVG = getXSLTransformator().transform(file, directory);                           
+                            File outSVG = getXSLTransformator().transform(file, directory, scheme);                           
                             request.setAttribute("resultSVG", outSVG.getName());
                             initializePage(request, response);
                             //response.sendRedirect(request.getContextPath()+URL_MAPPING);

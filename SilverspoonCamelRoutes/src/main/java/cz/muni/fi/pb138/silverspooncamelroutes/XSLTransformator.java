@@ -7,15 +7,19 @@ import javax.xml.transform.stream.*;
 
 public class XSLTransformator {
     
-    public File transform(File file, File directory) {
+    public File transform(File file, File directory, File scheme) {
+        
+        if(file == null) throw new XSLTransformatorException(new NullPointerException("file"));
+        if(directory == null) throw new XSLTransformatorException(new NullPointerException("directory"));
+        if(scheme == null) throw new XSLTransformatorException(new NullPointerException("scheme"));
+        
         // set the TransformFactory to use the Saxon TransformerFactoryImpl method 
         System.setProperty("javax.xml.transform.TransformerFactory", "net.sf.saxon.TransformerFactoryImpl");
-        ClassLoader classLoader = getClass().getClassLoader();
         // String filesDir = System.getProperty("user.dir") + "\\src\\main\\java\\cz\\muni\\fi\\pb138\\silverspooncamelroutes\\files\\";
         try {
             TransformerFactory tFactory = TransformerFactory.newInstance();
 
-            Source xslDoc = new StreamSource(classLoader.getResource("SvgTemplate1.xsl").getFile());
+            Source xslDoc = new StreamSource(scheme);
             Source xmlDoc = new StreamSource(file);
             
             File outFile = File.createTempFile("tmp", ".svg", directory);
