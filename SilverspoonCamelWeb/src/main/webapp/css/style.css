@@ -1,0 +1,68 @@
+body {
+    font-family: Lora,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    color: black;
+    background-color: #f5f5f5;
+    margin: 0px;
+    padding: 0px;
+}
+
+#header a:hover {
+    text-decoration: none;
+}
+
+h1 {
+    margin: 0 0 5px;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 60px;
+    padding-top: 70px;
+    padding-bottom: 30px;
+    color: white;
+    text-decoration: none;
+}
+
+h2 {
+    margin: 0 0 30px 0;
+    text-transform: uppercase;
+    font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 40px;
+    color: #486aa3;
+}
+
+#container {
+    width: 1000px;
+    margin: 0px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0px 0px 10px #888888;
+}
+
+#header {
+    width: 100%;
+    height: 300px;
+    background: url(../img/intro-bg.jpg);
+    background-position: center; 
+    color: white;
+    text-align: center;
+}
+
+.intro-text {
+    font-size: 20px;
+    text-shadow: 1px 1px 1px #486aa3;
+}
+
+.marginLabel {
+    margin-left: 20px;
+    margin-right: 5px;
+}
+
+#footer {
+    width: 1020px;
+    margin: 0px auto;
+    padding: 10px;
+    text-align: center;
+}

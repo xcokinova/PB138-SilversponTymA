@@ -9,50 +9,70 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <base href="http://localhost:8080/SilverspoonCamelWeb/" />
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Apache Camel Routes Transformator</title>
+        <title>Vizualizácia pre Silverspon.io pomocou XSLT</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="icon" href="img/favicon.ico">
     </head>
     <body>
-        <c:if test="${not empty chyba}">
-            <div style="border: solid 1px red; background-color: yellow; padding: 10px">
-                <c:out value="${chyba}"/>
-            </div>
-        </c:if>
-        <form method="POST" action="${pageContext.request.contextPath}/transformation/upload" enctype="multipart/form-data" >
-            <label for="type">Typ dosky</table>
-            <select name="type" id="type">
-                <c:choose>
-                    <c:when test="${param.type == 1}">
-                        <option value="1" selected>Raspberry Pi 2</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option value="1">Raspberry Pi 2</option>
-                    </c:otherwise>
-                </c:choose>
-                <c:choose>
-                    <c:when test="${param.type == 2}">
-                        <option value="2" selected>BeagleBoneBlack</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option value="2">BeagleBoneBlack</option>
-                    </c:otherwise>
-                </c:choose>
-                <c:choose>
-                    <c:when test="${param.type == 3}">
-                        <option value="3" selected>CubieBoard 2</option>
-                    </c:when>
-                    <c:otherwise>
-                        <option value="3">CubieBoard 2</option>
-                    </c:otherwise>
-                </c:choose>
-            </select><br />
-            
-            <label for="file">XML súbor</table>           
-            <input type="file" name="file" id="file" /><br/>
-            <input type="submit" value="Upload" /><br/>
-        </form>  
-        <c:if test="${not empty resultSVG}">
-            <img src="../${resultSVG}" width="950" height="540" alt="result image" />
-        </c:if>
+        <div id="header">
+            <a href=""><h1 class="brand-heading">Silverspoon.io</h1></a>
+            <p class="intro-text">Vizualizácia pomocou XSLT</p>
+        </div>
+        <div id="container">
+            <h2>Vizualizácia</h2>
+            <c:if test="${not empty chyba}">
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <c:out value="${chyba}"/>
+                </div>
+            </c:if>
+            <form class="form-inline" method="POST" action="${pageContext.request.contextPath}/transformation/upload" enctype="multipart/form-data" >
+                <div class="form-group">
+                    <label for="type">Typ dosky</label>
+                    <select class="form-control" name="type" id="type">
+                        <c:choose>
+                            <c:when test="${param.type == 1}">
+                                <option value="1" selected>Raspberry Pi 2</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="1">Raspberry Pi 2</option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${param.type == 2}">
+                                <option value="2" selected>BeagleBoneBlack</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="2">BeagleBoneBlack</option>
+                            </c:otherwise>
+                        </c:choose>
+                        <c:choose>
+                            <c:when test="${param.type == 3}">
+                                <option value="3" selected>CubieBoard 2</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="3">CubieBoard 2</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="file" class="marginLabel">XML súbor</label>           
+                    <input class="form-control-static" type="file" name="file" id="file" />
+                </div>
+                <button type="submit" class="btn btn-default">Vizualizovať</button>
+            </form>  
+            <c:if test="${not empty resultSVG}">
+                <img src="${resultSVG}" width="950" height="540" alt="result image" />
+            </c:if>
+        </div>
+        <div id="footer">
+            &copy; 2015 PB138-SilverspoonTymA
+        </div>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
     </body>
 </html>
