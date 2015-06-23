@@ -226,12 +226,6 @@
                 </text>
             </xsl:matching-substring>    
         </xsl:analyze-string>
-        <!-- line -->
-        <polyline points="250,80 250,{($startY)-12}"
-                  fill="none" stroke="white" 
-                  stroke-width="4"
-                  stroke-dasharray="5 5"
-                  marker-end="url(#markerArrow)" />   
     </xsl:template>
     
     <!-- FROM ARROW TEMPLATE -->
@@ -243,6 +237,12 @@
         </text> 
         <xsl:variable name="pinColumn" select="(number($pinNum)) mod 2"/>
         <xsl:variable name="pinRow" select="(((number($pinNum)) - 1) div 2) + ((((number($pinNum))  mod 2) -1) div 2)"/>
+        <!-- line -->
+        <polyline points="{390 +($pinRow)*20},{47+($pinColumn)*25} {390 +($pinRow)*20},{100} {($startX)+50},{100} {($startX)+50},{($startY)-12}"
+                  fill="none" stroke="white" 
+                  stroke-width="4"
+                  stroke-dasharray="5 5"
+                  marker-end="url(#markerArrow)" /> 
     </xsl:template>
     
     <!-- TO TEMPLATE -->
