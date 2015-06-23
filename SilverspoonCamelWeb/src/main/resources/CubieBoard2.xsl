@@ -122,6 +122,17 @@
                 <xsl:with-param name="portId" select="twoverticalports"/>
             </xsl:call-template>
             
+             <xsl:analyze-string select="//camelContext/route/from/@uri" regex='(.*?)://(.*?)_(.*?)\?value=.*?'>
+                <xsl:matching-substring>>
+                    <xsl:variable name="pinNumber" select="translate(regex-group(3), $smallcase, $uppercase)"/>
+                    <xsl:variable name="pin" select="translate(regex-group(2), $smallcase, $uppercase)"/>
+                    <xsl:call-template name="fromArrow">
+                        <xsl:with-param name="pinNum" select="$pinNumber"/>
+                        <xsl:with-param name="pin" select="$pin"/>
+                    </xsl:call-template>
+                </xsl:matching-substring>
+            </xsl:analyze-string> 
+            
             <!--TOP 1 11 21 31 41-->
             <text x="378" y="84" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">1</text>
             <text x="472" y="84" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">11</text>
@@ -221,6 +232,17 @@
                   stroke-width="4"
                   stroke-dasharray="5 5"
                   marker-end="url(#markerArrow)" />   
+    </xsl:template>
+    
+    <!-- FROM ARROW TEMPLATE -->
+    <xsl:template name="fromArrow">
+        <xsl:param name="pinNum" />  
+        <xsl:param name="pin"/> 
+        <text x="237" y="70" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 32px;">
+            <xsl:value-of select="concat($pin, '_', $pinNum)"/>
+        </text> 
+        <xsl:variable name="pinColumn" select="(number($pinNum)) mod 2"/>
+        <xsl:variable name="pinRow" select="(((number($pinNum)) - 1) div 2) + ((((number($pinNum))  mod 2) -1) div 2)"/>
     </xsl:template>
     
     <!-- TO TEMPLATE -->

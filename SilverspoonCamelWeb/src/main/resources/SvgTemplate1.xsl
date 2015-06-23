@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="2.0" 
                 xmlns="http://www.w3.org/2000/svg"
-                xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:beans="http://www.springframework.org/schema/beans" 
+                xmlns:camel="http://camel.apache.org/schema/spring">
     <xsl:output method="xml" indent="yes" standalone="yes" media-type="image/svg" />
     <!-- Chars for translate to lowercase/uppercase -->
     <xsl:variable name="smallcase" select="'abcdefghijklmnopqrstuvwxyz'" />
@@ -25,6 +27,17 @@
             
             <!-- Route FROM -->
             <xsl:apply-templates select="//camelContext/route/from"/>
+            
+            <xsl:analyze-string select="//camelContext/route/from/@uri" regex='(.*?)://(.*?)_(.*?)\?value=.*?'>
+                <xsl:matching-substring>>
+                    <xsl:variable name="pinNumber" select="translate(regex-group(3), $smallcase, $uppercase)"/>
+                    <xsl:variable name="pin" select="translate(regex-group(2), $smallcase, $uppercase)"/>
+                    <xsl:call-template name="fromArrow">
+                        <xsl:with-param name="pinNum" select="$pinNumber"/>
+                        <xsl:with-param name="pin" select="$pin"/>
+                    </xsl:call-template>
+                </xsl:matching-substring>
+            </xsl:analyze-string>
             
             <!-- Route TO -->
             <xsl:for-each select="//camelContext/route/to">
@@ -76,24 +89,21 @@
                 <xsl:with-param name="pTimes" select="20"/>
                 <xsl:with-param name="x" select="90"/>
             </xsl:call-template>
-
-            <xsl:analyze-string select="//camelContext/route/from/@uri" regex='(.*?)://(.*?)\?value=.*?'>
-                <xsl:matching-substring>
-                    <!--PH7 text-->
-                    <text x="137" y="70" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 32px;">
-                        <xsl:value-of select="translate(regex-group(2), $smallcase, $uppercase)"/>
-                    </text>
-                    
-                    <!--GPIO text-->
-                    <text x="115" y="95" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 16px;">
-                        <xsl:value-of select="translate(regex-group(1), $smallcase, $uppercase)"/>
-                    </text>
-                </xsl:matching-substring>
-            </xsl:analyze-string>
-
+            
             <!--ETHERNET BOX -->
             <xsl:call-template name="ethernetBox"/>
 
+             <xsl:analyze-string select="//camelContext/route/from/@uri" regex='(.*?)://(.*?)_(.*?)\?value=.*?'>
+                <xsl:matching-substring>>
+                    <xsl:variable name="pinNumber" select="translate(regex-group(3), $smallcase, $uppercase)"/>
+                    <xsl:variable name="pin" select="translate(regex-group(2), $smallcase, $uppercase)"/>
+                    <xsl:call-template name="fromArrow">
+                        <xsl:with-param name="pinNum" select="$pinNumber"/>
+                        <xsl:with-param name="pin" select="$pin"/>
+                    </xsl:call-template>
+                </xsl:matching-substring>
+            </xsl:analyze-string> 
+            
             <!-- marker for polylines-->
             <defs>
                 <marker id="markerArrow"
@@ -114,6 +124,7 @@
         <!-- route rectangle -->
         <rect x="{$startX}" y="{$startY}" width="125" height="50" fill="#CCFFFF" />
         <!-- route rectangle text -->
+
         <xsl:analyze-string select="//camelContext/route/from/@uri" regex="^[^:]+">
             <xsl:matching-substring>
                 <text x="{$startX+25}" y="{$startY+32}" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
@@ -121,12 +132,24 @@
                 </text>
             </xsl:matching-substring>    
         </xsl:analyze-string>
+
+    </xsl:template>
+    
+    <!-- FROM ARROW TEMPLATE -->
+    <xsl:template name="fromArrow">
+        <xsl:param name="pinNum" />  
+        <xsl:param name="pin"/> 
+        <text x="237" y="70" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 32px;">
+            <xsl:value-of select="concat($pin, '_', $pinNum)"/>
+        </text> 
+        <xsl:variable name="pinColumn" select="(number($pinNum) ) mod 2"/>
+        <xsl:variable name="pinRow" select="(((number($pinNum)) - 1) div 2) + ((((number($pinNum))  mod 2) -1) div 2)"/>
         <!-- line -->
-        <polyline points="167,80 167,{($startY)-12}"
+        <polyline points="{($startX)+(($pinRow)-1)*22},{50+($pinColumn)*25} {($startX)+(($pinRow)-1)*22},{100} {($startX)+50},{100} {($startX)+50},{($startY)-12}"
                   fill="none" stroke="white" 
                   stroke-width="4"
                   stroke-dasharray="5 5"
-                  marker-end="url(#markerArrow)" />   
+                  marker-end="url(#markerArrow)" /> 
     </xsl:template>
     
     <!-- TO TEMPLATE -->

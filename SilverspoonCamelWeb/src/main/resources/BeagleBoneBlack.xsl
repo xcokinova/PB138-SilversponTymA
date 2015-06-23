@@ -25,6 +25,8 @@
             <!-- Route FROM -->
             <xsl:apply-templates select="//camelContext/route/from"/>
             
+            
+            
             <!-- Route TO -->
             <xsl:for-each select="//camelContext/route/to">
                 <xsl:variable name="row" select="((position() div 3)-((position() mod 3) div 3))"/>
@@ -96,6 +98,16 @@
                 <xsl:with-param name="portId" select="serialdebugport"/>
             </xsl:call-template>
             
+            <xsl:analyze-string select="//camelContext/route/from/@uri" regex='(.*?)://(.*?)_(.*?)\?value=.*?'>
+                <xsl:matching-substring>>
+                    <xsl:variable name="pinNumber" select="translate(regex-group(3), $smallcase, $uppercase)"/>
+                    <xsl:variable name="pin" select="translate(regex-group(2), $smallcase, $uppercase)"/>
+                    <xsl:call-template name="fromArrow">
+                        <xsl:with-param name="pinNum" select="$pinNumber"/>
+                        <xsl:with-param name="pin" select="$pin"/>
+                    </xsl:call-template>
+                </xsl:matching-substring>
+            </xsl:analyze-string> 
             <!-- P8 -->
             <text x="204" y="107" font-family="Verdana" style="fill: #585858; stroke: none; font-size: 24px;">
                 P8
@@ -251,12 +263,24 @@
                 </text>
             </xsl:matching-substring>    
         </xsl:analyze-string>
+
+    </xsl:template>
+    
+    <!-- FROM ARROW TEMPLATE -->
+    <xsl:template name="fromArrow">
+        <xsl:param name="pinNum" />  
+        <xsl:param name="pin"/> 
+        <text x="237" y="70" font-family="Verdana" style="fill: #FFFFFF; stroke: none; font-size: 32px;">
+            <xsl:value-of select="concat($pin, '_', $pinNum)"/>
+        </text> 
+        <xsl:variable name="pinColumn" select="(number($pinNum)) mod 2"/>
+        <xsl:variable name="pinRow" select="(((number($pinNum)) - 1) div 2) + ((((number($pinNum))  mod 2) -1) div 2)"/>
         <!-- line -->
-        <polyline points="250,80 250,{($startY)-12}"
+        <polyline points="{($startX - 10)+(($pinRow)-1)*26},{50+($pinColumn)*25} {($startX - 10)+(($pinRow)-1)*26},{100} {($startX)+50},{100} {($startX)+50},{($startY)-12}"
                   fill="none" stroke="white" 
                   stroke-width="4"
                   stroke-dasharray="5 5"
-                  marker-end="url(#markerArrow)" />   
+                  marker-end="url(#markerArrow)" /> 
     </xsl:template>
     
     <!-- TO TEMPLATE -->
