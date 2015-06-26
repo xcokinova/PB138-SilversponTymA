@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml-4.5/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>DocBook Intro</title>
+    <author>
+      <firstname>Viktor</firstname>
+      <surname>Bako</surname>
+        <affiliation>
+          <orgname>Masarykova Univerzita, Fakulta informatiky</orgname>
+        </affiliation>
+    </author>
+    <pubdate>26.6.2015</pubdate>
+  </articleinfo>
+
+ <section>
+  <title>Webová aplikácia</title>
+  <para>
+    Ako prvé úspešne nahodená prvotná verzia webovej aplikácie (zatiaľ bez diazjnu), ktorá najprv vizualizovala iba jeden typ dosky.
+  </para>
+  <para>
+    V drhuhej verzii bol pridaný výber z troch dosiek pre vizualizáciu, užívateľ si ich sám vyberie. Tiež bol dokončený finálny dizajn tejto aplikácie.
+  </para>
+</section>
+<section>
+    <title>Validácia XML</title>
+    <para>
+      Vytvorená XSD schíma na validovanie vstupného XML podľa portieb applikácie( napr. max 8 "route to" elementov).
+    </para>
+    <para>
+      Zakomponovanie validácie xml do webovej aplikácie. 
+    </para>
+  </section>
+  <section>
+    
+  <section>
+    <title>Zhodnotenie projektu</title>
+    <para>
+      Pri práci na tomto projekte som sa naučil tímovej spolupráci a pripomenul si vytváranie webov. 
+    </para>
+  </section>
+</article>
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml-4.5/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>DocBook Intro</title>
+    <author>
+      <firstname>Jana</firstname>
+      <surname>Čokinová</surname>
+        <affiliation>
+          <orgname>Masarykova Univerzita, Fakulta informatiky</orgname>
+        </affiliation>
+    </author>
+    <pubdate>26.6.2015</pubdate>
+  </articleinfo>
+
+ <section>
+  <title>Vytvorenie XSL Transformator</title>
+  <para>
+    Mojou úlohou bolo vytvoriť Transformátor na transformáciu vstupného xml dokumentu pomocou XSL súboru na SVG dokument. Pri vytváraní triedy som použila Saxon TransformerFactoryImpl.
+  </para>
+</section>
+<section>
+    <title>XSL súbory</title>
+    <para>
+      Pomocou SVG súboru reprezentujúceho dosky som vytvorila XSL súbory. Každá doska má vlastný stylesheet.
+    </para>
+    <para>
+      Medzi zložitejšiu úlohu patrilo zoradenie "route elementov". To som vyriešila vo for-each cykle s pomocou temlatov nastavených rodzdielne pre párne a nepárne riadky.
+    </para>
+    <para>
+      Ďalšou úlohou na ktorej som strávila viac času bolo dynamické vytváranie šípok a lokalizácia pinu, no nakoniec som tieto problémy úspešne vyriešila.
+    </para>
+  </section>
+  <section>
+    
+  <section>
+    <title>Zhodnotenie projektu</title>
+    <para>
+      Projekt bol zaujímavý, tiež sme si mohli vyskúšať prvýkrát tímovú prácu, čo nás tiež veľa naučilo. Tiež som si v XSL precvičila prácu s templatmi a pod.
+    </para>
+  </section>
+</article>
+
+

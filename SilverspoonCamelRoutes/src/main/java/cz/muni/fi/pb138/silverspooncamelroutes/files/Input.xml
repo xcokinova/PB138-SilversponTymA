@@ -8,7 +8,7 @@
     </bean>
     <camelContext>
         <route>
-            <from uri="gpio://ph7?value=HIGH" />
+            <from uri="gpio://ph_7?value=HIGH" />
             <to uri="bean:webCamBean?method=getPicture" />
             <to uri="mqtt://iot-demo?host=tcp://localhost:1883&amp;publishTopicName=IotDemo"/>
         </route>

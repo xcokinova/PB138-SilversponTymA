@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!---->
+    <defs>  
+        <polygon points="0,0 50,7 50,30 0,38 0,34 40,25 40,13 0,4" 
+          id="polygon"
+          style="fill:#E0E0E0;" 
+          transform="rotate(90)"/>
+              
+        <marker id="markerArrow"
+                viewBox="0 0 10 10" 
+                refX="1" refY="5"
+                markerWidth="4" 
+                markerHeight="4"
+                orient="auto"
+                stroke="white" fill="white">
+            <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+        
+        <linearGradient y2="1" x2="1" id="gradMetal" spreadMethod="reflect"  gradientTransform="rotate(90)">
+            <stop stop-color="#D0D0D0" offset="0"/>
+            <stop stop-color="#707070" offset="0.5"/>
+            <stop stop-color="#D0D0D0" offset="1"/>
+        </linearGradient>
+        
+        <!-- PORTS -->       
+        <g id="twoverticalports">
+            <circle cx="0" cy="0" r="5"
+            style="stroke:#C0C0C0;
+                   stroke-width: 5;
+                   fill:#989898"/>
+            <circle cx="0" cy="20" r="5"
+            style="stroke:#C0C0C0;
+                   stroke-width: 5;
+                   fill:#989898"/>
+        </g>
+        <!-- SERIAL DEBUG PORT-->
+        <g id="serialdebugport">
+            <rect  x = "0" y = "0" rx="3" ry="3" width = "25" height = "25" style="fill:#282828"/>
+            <rect  x = "8" y = "8" rx="2" ry="2" width = "9.75" height = "9.75" style="fill:#FFCC66"/>
+        </g>
+    </defs>
+
+    <!-- BLACK BIG BOARD -->
+    <rect x = "25" y = "25" rx = "15" ry = "15" width = "900" height = "500" fill = "#101010"/>
+    
+    <!-- BLACK SMALL BOARD -->
+    <rect x = "225" y = "110" width = "525" height = "250" fill = "#282828"/>
+    
+    <!-- RECTANGLE LEFT BLUE text:gpio -->
+    <rect x = "250" y = "210" width = "125" height = "50" fill = "#FFFFFF "/>
+    <text x="277" y="242" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
+        gpio
+    </text>
+    
+    <!-- RECTANGLE MID BLUE text:bean -->
+    <rect x = "425" y = "210" width = "125" height = "50" fill = "#FFFFFF "/>
+    <text x="450" y="242" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
+        bean
+    </text>
+    
+    <!-- RECTANGLE RIGHT BLUE text:mqtt -->
+    <rect x = "600" y = "210" width = "125" height = "50" fill = "#FFFFFF "/>
+    <text x="625" y="242" font-family="Verdana" style="fill: #000000; stroke: none; font-size: 32px;">
+        mqtt
+    </text>
+    
+    <!-- CIRCLE LEFT TOP -->
+    <circle cx="190" cy="57" r="32"
+            style="fill:silver"/>
+    <circle cx="190" cy="57" r="20"
+            style="stroke:#FFCC66;
+                   stroke-width: 8;
+                   fill:#FFFFCC"/>
+    
+    <!-- CIRCLE RIGHT TOP -->
+    <circle cx="893" cy="57" r="32"
+            style="fill:silver"/>
+    <circle cx="893" cy="57" r="20"
+            style="stroke:#FFCC66;
+                   stroke-width: 8;
+                   fill:#FFFFCC"/>
+    
+    <!-- CIRCLE LEFT BOTTOM -->
+    <circle cx="190" cy="493" r="32"
+            style="fill:silver"/>
+    <circle cx="190" cy="493" r="20"
+            style="stroke:#FFCC66;
+                   stroke-width: 8;
+                   fill:#FFFFCC"/>
+    
+    <!-- CIRCLE RIGHT BOTTOM -->
+    <circle cx="893" cy="493" r="32"
+            style="fill:silver"/>
+    <circle cx="893" cy="493" r="20"
+            style="stroke:#FFCC66;
+                   stroke-width: 8;
+                   fill:#FFFFCC"/>
+
+    
+    <!--SUPER COMPLICATED POLYGON-->
+    <rect x = "225" y = "30"  width = "145" height = "55" style="fill:#404040"/>
+    <polygon points="240,40 355,40 355,45 360,45 360,65 355,65 355,70 350,70 350,75 245,75 245,70 240,70 240,65 235,65 235,45 240,45" 
+          style="fill:#101010" />
+    <polygon points="247,54 337,54 337,47 347,47 347,62 247,62"
+          style="fill:#404040" />
+    <!--TOP 46 PORTS-->
+    <rect x = "375" y = "30"  width = "490" height = "55" style="fill:#101010;stroke:silver;stroke-width:3"/>
+    <use xlink:href="#twoverticalports" x="390" y="47"/>
+    <use xlink:href="#twoverticalports" x="410" y="47"/>
+    <use xlink:href="#twoverticalports" x="430" y="47"/>
+    <use xlink:href="#twoverticalports" x="450" y="47"/>
+    <use xlink:href="#twoverticalports" x="470" y="47"/>
+    <use xlink:href="#twoverticalports" x="490" y="47"/>
+    <use xlink:href="#twoverticalports" x="510" y="47"/>
+    <use xlink:href="#twoverticalports" x="530" y="47"/>
+    <use xlink:href="#twoverticalports" x="550" y="47"/>
+    <use xlink:href="#twoverticalports" x="570" y="47"/>
+    <use xlink:href="#twoverticalports" x="590" y="47"/>
+    <use xlink:href="#twoverticalports" x="610" y="47"/>
+    <use xlink:href="#twoverticalports" x="630" y="47"/>
+    <use xlink:href="#twoverticalports" x="650" y="47"/>
+    <use xlink:href="#twoverticalports" x="670" y="47"/>
+    <use xlink:href="#twoverticalports" x="690" y="47"/>
+    <use xlink:href="#twoverticalports" x="710" y="47"/>
+    <use xlink:href="#twoverticalports" x="730" y="47"/>
+    <use xlink:href="#twoverticalports" x="750" y="47"/>
+    <use xlink:href="#twoverticalports" x="770" y="47"/>
+    <use xlink:href="#twoverticalports" x="790" y="47"/>
+    <use xlink:href="#twoverticalports" x="810" y="47"/>
+    <use xlink:href="#twoverticalports" x="830" y="47"/>
+    <use xlink:href="#twoverticalports" x="850" y="47"/>
+    <!--BOT 46 PORTS-->
+    <rect x = "375" y = "465"  width = "490" height = "55" style="fill:#101010;stroke:silver;stroke-width:3"/>
+    <use xlink:href="#twoverticalports" x="390" y="483"/>
+    <use xlink:href="#twoverticalports" x="410" y="483"/>
+    <use xlink:href="#twoverticalports" x="430" y="483"/>
+    <use xlink:href="#twoverticalports" x="450" y="483"/>
+    <use xlink:href="#twoverticalports" x="470" y="483"/>
+    <use xlink:href="#twoverticalports" x="490" y="483"/>
+    <use xlink:href="#twoverticalports" x="510" y="483"/>
+    <use xlink:href="#twoverticalports" x="530" y="483"/>
+    <use xlink:href="#twoverticalports" x="550" y="483"/>
+    <use xlink:href="#twoverticalports" x="570" y="483"/>
+    <use xlink:href="#twoverticalports" x="590" y="483"/>
+    <use xlink:href="#twoverticalports" x="610" y="483"/>
+    <use xlink:href="#twoverticalports" x="630" y="483"/>
+    <use xlink:href="#twoverticalports" x="650" y="483"/>
+    <use xlink:href="#twoverticalports" x="670" y="483"/>
+    <use xlink:href="#twoverticalports" x="690" y="483"/>
+    <use xlink:href="#twoverticalports" x="710" y="483"/>
+    <use xlink:href="#twoverticalports" x="730" y="483"/>
+    <use xlink:href="#twoverticalports" x="750" y="483"/>
+    <use xlink:href="#twoverticalports" x="770" y="483"/>
+    <use xlink:href="#twoverticalports" x="790" y="483"/>
+    <use xlink:href="#twoverticalports" x="810" y="483"/>
+    <use xlink:href="#twoverticalports" x="830" y="483"/>
+    <use xlink:href="#twoverticalports" x="850" y="483"/>
+    
+    <!--TOP 1 11 21 31 41-->
+    <text x="378" y="84" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">1</text>
+    <text x="472" y="84" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">11</text>
+    <text x="573" y="84" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">21</text>
+    <text x="672" y="84" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">31</text>
+    <text x="770" y="84" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">41</text>
+   
+    <!--BOT 1 11 21 31 41-->
+    <text x="432" y="477" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">41</text>
+    <text x="533" y="477" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">31</text>
+    <text x="632" y="477" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">21</text>
+    <text x="730" y="477" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">11</text>
+    <text x="835" y="477" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">1</text>
+    
+    
+    <!--LEFT METAL/BLACK BOX with some extra STUFF -->
+    <rect x="20" y="70" rx="2" ry="2" width="120" height="70"
+          style="fill:#303030"/>
+    <rect x="50" y="70" rx="2" ry="2" width="30" height="70"
+          style="fill:url(#gradMetal)"/>
+    <rect x="110" y="110" rx="2" ry="2" width="20" height="20"
+          style="fill:#202020"/>
+    <rect x="120" y="80" rx="2" ry="2" width="8" height="2"
+          style="fill:#FFFF99"/>
+    <rect x="120" y="90" rx="2" ry="2" width="8" height="2"
+          style="fill:#FFFF99"/>
+    
+    <!--LEFT METAL BOX -->
+    <rect x="20" y="225" rx="4" ry="4" width="100" height="150"
+          style="fill:url(#gradMetal)"/>
+    
+    <!--BOT METAL BOX -->
+    <rect x="230" y="385" rx="2" ry="2" width="134" height="150"
+          style="fill:url(#gradMetal)"/>
+    <use xlink:href="#polygon" x="290" y="470"/>
+    <use xlink:href="#polygon" x="340" y="470"/>
+    
+    <!--ETHERNET METAL BOX -->
+    <text x="790" y="330" font-family = "sans-serif" style="fill: #FFFFFF; stroke: none; font-size: 14px;">ETHERNET</text>
+    <rect x = "775" y = "335" rx="2" ry="2" width = "175" height = "125" style="fill:url(#gradMetal)"/>
+    
+    <!-- LINES -->
+    <polyline points="390,75 390,130 310,130 310,198"
+              fill="none" stroke="white" 
+              stroke-width="4"
+              stroke-dasharray="5 5"
+              marker-end="url(#markerArrow)" />
+    
+    <polyline points="375,235 410,235"
+              fill="none" stroke="white" 
+              stroke-width="4"
+              marker-end="url(#markerArrow)" />
+    
+    <polyline points="550,235 585,235"
+              fill="none" stroke="white" 
+              stroke-width="4"
+              marker-end="url(#markerArrow)" />
+    
+    <polyline points="725,235 757,235 757,400 762,400"
+              fill="none" stroke="white" 
+              stroke-width="4"
+              stroke-dasharray="5 5"
+              marker-end="url(#markerArrow)" />
+    
+</svg>

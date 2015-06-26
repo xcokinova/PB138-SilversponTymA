@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../docbook-xml-4.5/docbookx.dtd">
+
+<article>
+    <articleinfo>
+        <title>DocBook Intro</title>
+        <author>
+            <firstname>Matej</firstname>
+            <surname>Vaško</surname>
+            <affiliation>
+                <orgname>Masarykova Univerzita, Fakulta informatiky</orgname>
+            </affiliation>
+        </author>
+        <pubdate>26.6.2015</pubdate>
+    </articleinfo>
+
+    <section>
+        <title>Vizualizácia dosiek</title>
+        <para>
+            Vizualizácia dosiek pomocou SVG (Scalable Vector Graphic) prebiehala bez vážnejších komplikácií. V podstate sa stačilo oboznámiť iba so syntaxou. Samotné tvorenie obrázkov bolo intuitívne. Využívali sa základné počty, pri ktorých som sa dopúšťal chýb z nepozornosti.
+        </para>
+    </section>
+
+    <section>
+        <title>Zhodnotenie projektu</title>
+        <para>
+            Pri práci na tomto projekte som sa naučil pracovať s SVG (Scalable Vector Graphics). Projekt bol realizovaný v tíme, čo bolo pre mňa novinkou. Tímová práca prebiehala prekvapivo dobre aj napriek skutočnosti že nás opustil jeden člen tímu.
+        </para>
+    </section>
+</article>
+
+
