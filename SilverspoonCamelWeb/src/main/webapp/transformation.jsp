@@ -39,10 +39,10 @@
                     <select class="form-control" name="type" id="type">
                         <c:choose>
                             <c:when test="${param.type == 1}">
-                                <option value="1" selected>Raspberry Pi 2</option>
+                                <option value="1" selected>Raspberry Pi B+</option>
                             </c:when>
                             <c:otherwise>
-                                <option value="1">Raspberry Pi 2</option>
+                                <option value="1">Raspberry Pi B+</option>
                             </c:otherwise>
                         </c:choose>
                         <c:choose>
